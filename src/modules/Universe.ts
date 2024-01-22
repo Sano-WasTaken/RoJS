@@ -1,6 +1,7 @@
 import { listDatastore } from "./Functions/ListDatastores";
-import { sendMessage } from "./Functions/SendMessage";
+import { PublishRequest, sendMessage } from "./Functions/SendMessage";
 import { DataStore } from "./classes/DataStore";
+import { getOrderedDataStore } from "./classes/OrderedDataStore";
 
 export class Universe
 {
@@ -18,18 +19,18 @@ export class Universe
         return new DataStore(this.apiKey, this.universeId, name, scope)
     }
 
+    public getOrderedDataStore(name: string, scope="global")
+    {
+        return new getOrderedDataStore(this.apiKey, this.universeId, name, scope)
+    }
+
     public async listDatastores(prefix="", cursor="", limit=5)
     {
         return await listDatastore(this.apiKey, this.universeId, prefix, cursor, limit)
     }
 
-    public async sendMessage(topic: string, message: string | object)
+    public async sendMessage(topic: string, message: PublishRequest)
     {
         return await sendMessage(this.apiKey, this.universeId, topic, message)
-    }
-
-    public getOrderedDataStore(name: string)
-    {
-
     }
 }

@@ -3,13 +3,28 @@ import CryptoJS = require("crypto-js");
 
 const url = "https://apis.roblox.com/datastores"
 
-interface ResponseListEntryVersions
+interface ResponseSetEntry
 {
     version: string,
     deleted: boolean,
     contentLength: number,
     createdTime: string,
     objectCreatedTime: string,
+}
+
+interface ResponseListEntries
+{
+    keys: string[],
+    nextPageCursor: string
+}
+
+interface ResponseEntry
+{
+    "content-md5": string,
+    "roblox-entry-version": string,
+    "roblox-entry-created-time": string,
+    "roblox-entry-version-created-time": string,
+    "roblox-entry-userids": number[]
 }
 
 export class DataStore
@@ -27,7 +42,7 @@ export class DataStore
         this.scope = scope;
     }
 
-    public async listEntries(prefix="", limit=5, cursor="", allScope=false)
+    public async listEntries(prefix="", limit=5, cursor="", allScope=false): AxiosPromise<ResponseListEntries>
     {
         return await axios.get(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries`,
@@ -47,7 +62,7 @@ export class DataStore
         )
     }
 
-    public async getEntry(key: string)
+    public async getEntry(key: string): AxiosPromise<ResponseEntry>
     {
         return await axios.get(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry`,
@@ -64,7 +79,7 @@ export class DataStore
         )
     }
 
-    public async setEntry(key: string, data: any | object, exclusiveCreate=false)
+    public async setEntry(key: string, data: any | object, exclusiveCreate=false): AxiosPromise<ResponseSetEntry>
     {
         return await axios.post(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry`,
@@ -102,7 +117,7 @@ export class DataStore
         )
     }
 
-    public async incrementEntry(key: string, increment: number)
+    public async incrementEntry(key: string, increment: number): AxiosPromise<ResponseEntry>
     {
         return await axios.post(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry/increment`,
@@ -121,7 +136,7 @@ export class DataStore
         )
     }
 
-    public async getEntryVersion(key: string, versionId: string)
+    public async getEntryVersion(key: string, versionId: string): AxiosPromise<ResponseEntry>
     {
         return await axios.get(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry/versions/version`,
@@ -139,7 +154,7 @@ export class DataStore
         )
     }
 
-    public async listEntryVersions(key: string, limit=5, sortOrder?: "asc"|"des", cursor=""): AxiosPromise<ResponseListEntryVersions[]>
+    public async listEntryVersions(key: string, limit=5, sortOrder?: "asc"|"des", cursor=""): AxiosPromise<ResponseSetEntry[]>
     {
         return await axios.get(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry/versions`,
