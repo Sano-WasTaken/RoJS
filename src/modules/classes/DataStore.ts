@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios, { AxiosPromise } from "axios";
+import CryptoJS = require("crypto-js");
 
 const url = "https://apis.roblox.com/datastores"
 
@@ -63,7 +64,7 @@ export class DataStore
         )
     }
 
-    public async setEntry(key: string, data: string | object, exclusiveCreate=false)
+    public async setEntry(key: string, data: any | object, exclusiveCreate=false)
     {
         return await axios.post(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry`,
@@ -105,16 +106,15 @@ export class DataStore
     {
         return await axios.post(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry/increment`,
-            increment,
+            increment.toString(),
             {
                 headers: {
                     "x-api-key": this.apiKey,
-                    "content-lenght": 0,
                 },
                 params: {
                     datastoreName: this.name,
                     entryKey: key,
-                    incrementBy: increment,
+                    incrementBy: increment.toString(),
                     scope: this.scope,
                 }
             }
@@ -139,7 +139,7 @@ export class DataStore
         )
     }
 
-    public async listEntryVersions(key: string, limit=5, sortOrder?: "asc"|"des", cursor=""): Promise<ResponseListEntryVersions[]>
+    public async listEntryVersions(key: string, limit=5, sortOrder?: "asc"|"des", cursor=""): AxiosPromise<ResponseListEntryVersions[]>
     {
         return await axios.get(
             url + `/v1/universes/${this.universeId}/standard-datastores/datastore/entries/entry/versions`,

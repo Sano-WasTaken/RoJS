@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { Axios, AxiosPromise, ResponseType } from "axios";
 
 const url = "https://apis.roblox.com/datastores"
 
@@ -11,7 +11,7 @@ interface ResponseListDatastores
     nextPageCursor: string
 }
 
-export async function listDatastore(apiKey: string, universeId: string, prefix="", cursor="", limit=5): Promise<ResponseListDatastores> {
+export async function listDatastore(apiKey: string, universeId: string, prefix="", cursor="", limit=5): AxiosPromise<ResponseListDatastores> {
     return await axios.get(
         url + `/v1/universes/${universeId}/standard-datastores`,
         {
