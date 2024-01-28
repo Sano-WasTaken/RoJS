@@ -1,9 +1,9 @@
 import axios, { AxiosPromise } from "axios";
-import { ResponseGetGroupsGames, ResponseGetUniverseIdsInformation } from "../interfaces";
+import { ResponseGetGroupsGames, ResponseGetUniverseIdsInformation } from "../Interfaces/MediaInterfaces";
 
 const url = "https://games.roblox.com"
 
-export async function getMediaFromUniverseId(universeId: number): AxiosPromise<ResponseGetUniverseIdsInformation>
+export async function getUniverseInformations(universeId: number): AxiosPromise<ResponseGetUniverseIdsInformation>
 {
     return await axios.get(
         url + `/v1/games`,

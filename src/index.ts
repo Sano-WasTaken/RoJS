@@ -1,4 +1,4 @@
-import { getMediaFromUniverseId } from "./modules/Functions/GamesFunctions";
+import { getUniverseInformations } from "./modules/Functions/GamesFunctions";
 import { getGroup, listGroupMemberships, listGroupRoles } from "./modules/Functions/GroupFunctions";
 import { listInventoryItem } from "./modules/Functions/InventoryFunctions";
 import { Universe } from "./modules/Universe";
@@ -23,6 +23,12 @@ async function test()
     return one === two
 }
 
-test().then(res => console.log(res))
+test()
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
+console.error("error")
+
+getUniverseInformations(uniID).then(res => console.log(res.data.data))
 
 //listInventoryItem(key, 162206312).then(res => console.log(res.data.inventoryItems[0]))

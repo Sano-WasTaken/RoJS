@@ -1,4 +1,4 @@
-interface Media
+export interface Media
 {
     "assetTypeId": number,
     "assetType": string,
@@ -9,7 +9,7 @@ interface Media
     "altText": string,
 }
 
-interface Creator
+export interface Creator
 {
     "id": number,
     "name": string,
@@ -18,7 +18,7 @@ interface Creator
     "hasVerifiedBadge": boolean
 }
 
-interface UniverseIdsInformation
+export interface UniverseIdsInformation
 {
     "id": number,
     "rootPlaceId": string,
@@ -45,12 +45,12 @@ interface UniverseIdsInformation
     "favoriteByUserCount": 0
 }
 
-interface ResponseGetUniverseIdsInformation
+export interface ResponseGetUniverseIdsInformation
 {
     "data": UniverseIdsInformation[]
 }
 
-interface ResponseGetGroupsGames
+export interface ResponseGetGroupsGames
 {
     "previousPageCursor": string,
     "nextPageCursor": string,
@@ -74,9 +74,4 @@ interface ResponseGetGroupsGames
             "placeVisits": number
         }
     ]
-}
-
-export {
-    ResponseGetUniverseIdsInformation,
-    ResponseGetGroupsGames
 }

@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosPromise, ResponseType } from "axios";
+import axios, { AxiosPromise } from "axios";
 
 const url = "https://apis.roblox.com/datastores"
 
