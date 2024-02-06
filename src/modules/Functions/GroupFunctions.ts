@@ -1,5 +1,6 @@
 import axios, { AxiosPromise } from "axios";
 import { ResponseGetGroup, ResponseListGroupMemberships, ResponseListGroupRoles } from "../Interfaces/GroupInterfaces";
+import { ResponseGetGroupsGames } from "../Interfaces/MediaInterfaces";
 
 const url = "https://apis.roblox.com/cloud"
 
@@ -43,6 +44,21 @@ export async function listGroupMemberships(apiKey: string, groupId: number, maxP
                 maxPageSize: maxPageSize,
                 pageToken: pageToken,
                 filter: filter
+            }
+        }
+    )
+}
+
+export async function getCreatedGroupGames(groupId: string, accessFilter: number, limit: number, cursor: string, sortOrder="Asc"): AxiosPromise<ResponseGetGroupsGames>
+{
+    return await axios.get(
+        `https://games.roblox.com/v2/groups/${groupId}/gamesV2`,
+        {
+            params: {
+                accessFilter: accessFilter,
+                limit: limit,
+                cursor: cursor,
+                sortOrder: sortOrder
             }
         }
     )

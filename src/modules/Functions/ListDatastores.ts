@@ -2,7 +2,7 @@ import axios, { AxiosPromise } from "axios";
 
 const url = "https://apis.roblox.com/datastores"
 
-interface ResponseListDatastores
+export interface ResponseListDatastores
 {
     datastores: {
         name: string,
