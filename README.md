@@ -5,7 +5,7 @@ A JS Roblox Game Manager using Cloud API
 - OrderedDataStores,
 - SendMessage with the MessagingService,
 
-to import with node
+to import with nopm
 
 ```cmd
 npm i ro-js
